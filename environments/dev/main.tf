@@ -16,20 +16,22 @@ terraform {
     }
   }
 
-  # ── Remote backend — estado guardado en S3 ────────────────
+ # ── Remote backend ────────────────────────────────────────
   backend "s3" {
     bucket         = "tf-state-emmanuel-ledesma-2026"
     key            = "dev/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "tf-state-lock"
     encrypt        = true
-    profile        = "terraform-pipeline"
+    # Sin profile — en CI usa AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY
+    # En local usa el perfil configurado en AWS CLI via env var
   }
 }
 
 provider "aws" {
-  region  = "us-east-1"
-  profile = "terraform-pipeline"
+  region = "us-east-1"
+  # Sin profile — funciona tanto en CI como en local
+  # si configurás: $env:AWS_PROFILE = "terraform-pipeline"
 }
 
 # ── Módulo 1: Compute (Lambda + IAM) ────────────────────────
