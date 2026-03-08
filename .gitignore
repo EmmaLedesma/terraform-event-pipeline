@@ -1,0 +1,25 @@
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+**/.terraform.lock.hcl
+*.zip
+crash.log
+override.tf
+override.tf.json
+
+# Variables con valores sensibles
+*.tfvars
+!*.tfvars.example
+
+# AWS credentials
+.aws/
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
